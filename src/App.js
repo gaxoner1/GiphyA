@@ -31,7 +31,7 @@ class App extends React.Component {
 
   getImage = query => {
     const passImage = this.setImageState;
-    const img = document.querySelector("img");
+    // const img = document.querySelector("img");
     fetch(
       `https://api.giphy.com/v1/gifs/translate?api_key=qDxuibsVZ3A1TqAqD5DczQv9h9ZOsG6c&s=${query}`,
       { mode: "cors" }
