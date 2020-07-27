@@ -1,14 +1,17 @@
-/* API Project converted to try catch block 
+/* API Project converted to try catch block
 with async-await methods*/
 
 import React from "react";
 import "./styles.css";
-import firebase from "./firebase"; // <--- add this line
+import firebase from "./firebase";
+
+console.log(`process env: ${process.env.REACT_APP_API_KEY}`)
 
 const keys = {
   app_id: "5fb1cce8",
   apiKey: "b9ff5d5d50e22b60f7fcf4ef5c9344d7"
 };
+
 
 class App extends React.Component {
   constructor(props) {
