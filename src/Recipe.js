@@ -3,6 +3,7 @@ with async-await methods*/
 
 import React from "react";
 import "./styles.css";
+import firebase from "./firebase"; // <--- add this line
 
 const keys = {
   app_id: "5fb1cce8",
@@ -18,8 +19,7 @@ class App extends React.Component {
       // image: "",
       mealSearch: "",
       mealResult: "",
-      recipe: [],
-      title: "Meal Ideas"
+      recipe: []
     };
   }
 
@@ -35,6 +35,7 @@ class App extends React.Component {
     //pass the query into getImage fucntion
     //this.getImage(this.state.search);
     this.getMeal(this.state.mealSearch);
+
     //clear state after its passed.
     this.setState({
       mealSearch: ""
@@ -58,9 +59,21 @@ class App extends React.Component {
         mealResult: food,
         recipe: ingredients
       });
+      this.saveResult(food, ingredients);
     } catch (err) {
       console.log(`todo Handle Error: ${err}`);
     }
+  };
+
+  //saves to Firebase collection recipe
+  saveResult = (food, ingredients) => {
+    const recipeRef = firebase.database().ref("recipe");
+    const item = {
+      title: food,
+      list: ingredients
+    };
+    console.log(`Firebease: ${recipeRef}`);
+    recipeRef.push(item);
   };
 
   // getGiphy = async query => {
@@ -99,7 +112,7 @@ class App extends React.Component {
         <h2>Meal Generator</h2>
         <div className="resultBody">
           <h3>{this.state.mealResult}</h3>
-          <p>Recipe</p>
+          <p>Search Recipe</p>
           {/* <img src={this.state.image} alt="" className="mealTitle" /> */}
           <div className="ingredients">
             <ul>
