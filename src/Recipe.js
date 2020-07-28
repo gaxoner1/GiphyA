@@ -54,9 +54,17 @@ class App extends React.Component {
         { mode: "cors" }
       );
       let mealJson = await response.json();
-      console.log(`response.json(): ${mealJson}`);
-      let food = mealJson.hits[0].recipe.label;
-      let ingredients = mealJson.hits[0].recipe.ingredientLines;
+      console.log(`response.json(): ${mealJson}`)
+
+      //get random element in array returned from recipe API
+      let recipeArray = mealJson.hits;
+      let randRecipe =
+        recipeArray[Math.floor(Math.random() * recipeArray.length)];
+
+      //pass random index to recipe jSON returned
+      let food = randRecipe.recipe.label;
+      let ingredients = randRecipe.recipe.ingredientLines;
+    
       console.log(`response: ${ingredients}`);
       this.setState({
         mealResult: food,
